@@ -22,5 +22,5 @@ public class Role {
 
     @NotNull
     @NonNull
-    private String role;
+    private String roleName;
 }
