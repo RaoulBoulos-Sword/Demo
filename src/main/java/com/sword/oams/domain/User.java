@@ -8,11 +8,14 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
+@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
@@ -33,11 +36,11 @@ public class User {
 
     @NotNull
     @NonNull
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-
-    @NotNull
-    @NonNull
     private String address;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "authRole_id"))
+    private Set<AuthenticationRole> roles = new HashSet<>();
 }

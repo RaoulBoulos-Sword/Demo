@@ -7,23 +7,16 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
-import javax.validation.constraints.NotNull;
-
-@Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Data
 @Entity
-@Table(name = "room")
-public class Room {
+@Table(name = "auth_Roles")
+public class AuthenticationRole {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    private Long room_id;
+    private Long auth_id;
 
-    @NotNull
+    @Enumerated(EnumType.STRING)
     @NonNull
-    private String block;
-
-    @NotNull
-    @NonNull
-    private int deskNumber;
+    private ERole name;
 }

@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
+@Table(name = "employee")
 public class Employee {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
