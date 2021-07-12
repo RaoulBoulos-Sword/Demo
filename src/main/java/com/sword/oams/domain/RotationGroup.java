@@ -6,7 +6,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.DayOfWeek;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,14 +18,14 @@ public class RotationGroup {
     @NotNull
     private Long rotation_id;
 
+    @NotNull
+    @NonNull
+    private String name;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "rotation_days",
             joinColumns = @JoinColumn(name = "rotation_id"),
             inverseJoinColumns = @JoinColumn(name = "weekday_id"))
-    private Set<Role> weekdays = new HashSet<>();
-
-    @NonNull
-    @NotNull
-    private String name;
+    private Set<Weekdays> weekdays = new HashSet<>();
 }
 

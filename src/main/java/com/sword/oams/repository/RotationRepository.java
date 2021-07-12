@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface RotationRepository extends JpaRepository<RotationGroup, Long> {
     Optional<RotationGroup> findByName(String name);
+    Boolean existsByName(String name);
 }

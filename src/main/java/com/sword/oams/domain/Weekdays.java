@@ -1,21 +1,21 @@
 package com.sword.oams.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "weekdays")
-public class weekdays {
+public class Weekdays {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long weekday_id;
 
-    @NotNull
-    private String dayName;
+    @Enumerated(EnumType.STRING)
+    @NonNull
+    private WDay weekDay;
 }

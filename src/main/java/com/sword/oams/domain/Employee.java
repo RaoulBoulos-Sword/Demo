@@ -28,10 +28,13 @@ public class Employee {
 
     @NotNull
     @NonNull
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @ManyToOne
+    @NotNull
+    @NonNull
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "room_id")
     private Room room;
 }
