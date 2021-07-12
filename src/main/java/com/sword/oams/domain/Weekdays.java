@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 @Table(name = "weekdays")
 public class Weekdays {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long weekday_id;
 
     @Enumerated(EnumType.STRING)
