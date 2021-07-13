@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Employee {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    private Long employee_id;
+    private Long employeeId;
 
     @NotNull
     @NonNull
@@ -28,12 +28,12 @@ public class Employee {
     @NotNull
     @NonNull
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "team_id")
+    @JoinColumn(name = "teamId")
     private Team team;
 
     @NotNull
     @NonNull
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "roomId")
     private Room room;
 }

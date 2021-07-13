@@ -9,10 +9,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "weekdays")
+@Table(name = "weekDays")
 public class Weekdays {
     @Id
-    private Long weekday_id;
+    @NonNull
+    private Long weekDayId;
+    //CamelCase
 
     @Enumerated(EnumType.STRING)
     @NonNull

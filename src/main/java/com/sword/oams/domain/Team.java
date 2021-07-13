@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Team {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    private Long team_id;
+    private Long teamId;
 
     @NotNull
     @NonNull

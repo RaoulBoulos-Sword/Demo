@@ -2,7 +2,9 @@ package com.sword.oams.rest;
 
 import com.sword.oams.domain.Room;
 import com.sword.oams.exception.RoomNotFoundException;
+import com.sword.oams.payload.request.RoomRequest;
 import com.sword.oams.repository.RoomRepository;
+import com.sword.oams.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,30 +14,24 @@ import java.util.List;
 @RequestMapping("/oams/rooms")
 public class RoomController {
     @Autowired
-    RoomRepository roomRepository;
+    RoomService roomService;
 
     @GetMapping("")
-    List<Room> allRooms() {
-        return roomRepository.findAll();
-    }
+    List<Room> allRooms() { return roomService.getAllRooms(); }
 
     @PostMapping("")
-    Room addRoom(@RequestBody Room newRoom) {
-        return roomRepository.save(newRoom);
-    }
+    Room addRoom(@RequestBody RoomRequest request) { return roomService.addRoom(request); }
 
     @GetMapping("/{id}")
-    Room getRoom(@PathVariable Long id) {
-        return roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException(id));
-    }
+    Room getRoom(@PathVariable Long id) { return roomService.getRoomById(id); }
 
     @PutMapping("/{id}")
-    Room updateRoom(@RequestBody Room newRoom,@PathVariable Long id) {
-        return null;
+    Room updateRoom(@RequestBody RoomRequest request, @PathVariable Long id) {
+        return roomService.updateRoomById(id,request);
     }
 
     @DeleteMapping("/{id}")
     void deleteRoom(@PathVariable Long id) {
-        roomRepository.deleteById(id);
+        roomService.deleteRoomById(id);
     }
 }

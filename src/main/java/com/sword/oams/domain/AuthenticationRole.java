@@ -11,10 +11,10 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Data
 @Entity
-@Table(name = "auth_Roles")
+@Table(name = "authRoles")
 public class AuthenticationRole {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long auth_id;
+    private Long authRoleId;
 
     @Enumerated(EnumType.STRING)
     @NonNull

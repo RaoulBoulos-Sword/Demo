@@ -13,19 +13,20 @@ import java.util.Set;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
+@Table(name = "rotationGroup")
 public class RotationGroup {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Long rotation_id;
+    private Long rotationId;
 
     @NotNull
     @NonNull
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "rotation_days",
-            joinColumns = @JoinColumn(name = "rotation_id"),
-            inverseJoinColumns = @JoinColumn(name = "weekday_id"))
+    @JoinTable(name = "rotationDays",
+            joinColumns = @JoinColumn(name = "rotationId"),
+            inverseJoinColumns = @JoinColumn(name = "weekDayId"))
     private Set<Weekdays> weekdays = new HashSet<>();
 }
 

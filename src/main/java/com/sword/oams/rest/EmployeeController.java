@@ -15,31 +15,31 @@ import java.util.List;
 @RequestMapping("/oams/employees")
 @Api( tags = "Employees")
 public class EmployeeController {
-    @Autowired
-    EmployeeRepository employeeRepository;
 
     @Autowired
     EmployeeService employeeService;
 
     @GetMapping("")
     @ApiOperation(value = "This method is used to get the employees.")
-    List<Employee> allEmployees() {
-        return employeeRepository.findAll();
-    }
+    public List<Employee> getEmployees() { return employeeService.getAllEmployees(); }
 
-    @PostMapping("/pop")
+    @PostMapping("")
+    @ApiOperation(value = "This method is used to add an employee.")
     Employee addEmployee(@RequestBody EmployeeRequest employee) {
         return employeeService.addEmployee(employee);
     }
 
     @GetMapping("/{id}")
-    Employee getEmployee(@PathVariable Long id) {
-        return employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee Not Found"));
-    }
+    @ApiOperation(value = "This method is used to get an employee by his id.")
+    Employee getEmployee(@PathVariable Long id) { return employeeService.getEmployeeById(id); }
 
     @DeleteMapping("/{id}")
-    void deleteEmployee(@PathVariable Long id) {
-        employeeRepository.deleteById(id);
+    @ApiOperation(value = "This method is used to delete an employee by his id.")
+    void deleteEmployee(@PathVariable Long id) { employeeService.deleteEmployeeById(id); }
+
+    @PutMapping("/{id}")
+    @ApiOperation(value = "This method is used to update an employee by his id.")
+    Employee updateEmployee(@PathVariable Long id, @RequestBody EmployeeRequest request) {
+        return employeeService.updateEmployeeById(id, request);
     }
 }
