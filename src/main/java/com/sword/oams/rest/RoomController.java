@@ -3,6 +3,7 @@ package com.sword.oams.rest;
 import com.sword.oams.domain.Room;
 import com.sword.oams.payload.request.RoomRequest;
 import com.sword.oams.service.RoomService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/oams/rooms")
+@Api(tags = "Rooms")
 public class RoomController {
     @Autowired
     RoomService roomService;

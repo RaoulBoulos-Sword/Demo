@@ -6,8 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "weekDays")
 public class Weekdays {

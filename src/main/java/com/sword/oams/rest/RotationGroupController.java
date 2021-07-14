@@ -3,12 +3,14 @@ package com.sword.oams.rest;
 import com.sword.oams.domain.RotationGroup;
 import com.sword.oams.payload.request.RotationRequest;
 import com.sword.oams.service.RotationService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("oams/rotationGroups")
+@Api(tags = "Rotation Groups")
 public class RotationGroupController {
     @Autowired
     RotationService rotationService;

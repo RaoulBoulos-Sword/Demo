@@ -3,6 +3,7 @@ package com.sword.oams.rest;
 import com.sword.oams.domain.Team;
 import com.sword.oams.payload.request.TeamRequest;
 import com.sword.oams.service.TeamService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/oams/teams")
+@Api(tags = "Teams")
 public class TeamController {
     @Autowired
     TeamService teamService;
