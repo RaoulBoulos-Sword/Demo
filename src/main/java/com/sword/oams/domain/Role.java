@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Role {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
+    @Column(name = "roleId")
     private Long roleId;
 
     @NotNull

@@ -1,8 +1,8 @@
 package com.sword.oams.rest;
 
 import com.sword.oams.domain.Team;
-import com.sword.oams.exception.TeamNotFoundException;
-import com.sword.oams.repository.TeamRepository;
+import com.sword.oams.payload.request.TeamRequest;
+import com.sword.oams.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,30 +12,26 @@ import java.util.List;
 @RequestMapping("/oams/teams")
 public class TeamController {
     @Autowired
-    TeamRepository teamRepository;
+    TeamService teamService;
 
     @GetMapping("")
     List<Team> allTeams() {
-        return teamRepository.findAll();
+        return teamService.getAllTeams();
     }
 
     @PostMapping("")
-    Team addTeam(@RequestBody Team newTeam) {
-        return teamRepository.save(newTeam);
+    Team addTeam(@RequestBody TeamRequest request) {
+        return teamService.addTeam(request);
     }
 
     @GetMapping("/{id}")
-    Team getTeam(@PathVariable Long id) {
-        return teamRepository.findById(id).orElseThrow(() -> new TeamNotFoundException(id));
-    }
+    Team getTeam(@PathVariable Long id) { return teamService.getTeamById(id); }
 
     @PutMapping("/{id}")
-    Team updateTeam(@RequestBody Team newTeam,@PathVariable Long id) {
-        return null;
-    }
+    Team updateTeam(@RequestBody TeamRequest request,@PathVariable Long id) { return teamService.updateTeamById(id, request); }
 
     @DeleteMapping("/{id}")
     void deleteTeam(@PathVariable Long id) {
-        teamRepository.deleteById(id);
+        teamService.deleteTeamById(id);
     }
 }

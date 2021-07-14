@@ -2,8 +2,6 @@ package com.sword.oams.rest;
 
 import com.sword.oams.domain.Room;
 import com.sword.oams.domain.Weekdays;
-import com.sword.oams.exception.RoomNotFoundException;
-import com.sword.oams.repository.RoomRepository;
 import com.sword.oams.repository.WeekDayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,9 +1,7 @@
 package com.sword.oams.rest;
 
 import com.sword.oams.domain.Role;
-import com.sword.oams.exception.RoleNotFoundException;
 import com.sword.oams.payload.request.RoleRequest;
-import com.sword.oams.repository.RoleRepository;
 import com.sword.oams.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

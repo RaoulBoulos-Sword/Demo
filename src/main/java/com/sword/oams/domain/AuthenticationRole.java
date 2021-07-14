@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Table(name = "authRoles")
 public class AuthenticationRole {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "authRoleId")
     private Long authRoleId;
 
     @Enumerated(EnumType.STRING)

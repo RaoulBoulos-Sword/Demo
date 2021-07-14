@@ -1,6 +1,7 @@
 package com.sword.oams.payload.request;
 
 import com.sword.oams.domain.WDay;
+import com.sword.oams.domain.Weekdays;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -11,5 +12,6 @@ public class RotationRequest {
     @NotBlank
     private String name;
 
-    private Set<WDay> weekDay;
+    @NotBlank
+    private Set<Weekdays> weekDay;
 }

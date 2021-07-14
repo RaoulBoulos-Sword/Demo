@@ -1,21 +1,21 @@
 package com.sword.oams.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "team")
 public class Team {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
+    @Column(name = "teamId")
     private Long teamId;
 
     @NotNull

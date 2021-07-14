@@ -13,8 +13,8 @@ import javax.validation.constraints.NotNull;
 public class Weekdays {
     @Id
     @NonNull
+    @Column(name = "weekDayId")
     private Long weekDayId;
-    //CamelCase
 
     @Enumerated(EnumType.STRING)
     @NonNull
