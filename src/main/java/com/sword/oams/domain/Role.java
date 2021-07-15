@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "role")
@@ -18,5 +19,6 @@ public class Role {
     private Long roleId;
 
     @NotNull
+    @NonNull
     private String roleName;
 }

@@ -29,13 +29,13 @@ public class EmployeeService {
 	TeamRepository teamRepository;
 
 	public Employee addEmployee(EmployeeRequest request) {
-		Room room = this.roomRepository.findById(request.getRoomId()).orElse(null);
+		//Room room = this.roomRepository.findById(request.getRoomId()).orElse(null);
 		Team team = this.teamRepository.findById(request.getTeamId()).orElse(null);
 
 		Employee employee = Employee.builder()
 				.firstName(request.getFirstName())
 				.lastName(request.getLastName())
-				.room(room)
+				//.room(room)
 				.team(team).build();
 
 		return employeeRepository.save(employee);
@@ -53,14 +53,14 @@ public class EmployeeService {
 
 	public Employee updateEmployeeById(Long id, EmployeeRequest request) {
 		Team team = teamRepository.findById(request.getTeamId()).orElse(null);
-		Room room = this.roomRepository.findById(request.getRoomId()).orElse(null);
+		//Room room = this.roomRepository.findById(request.getRoomId()).orElse(null);
 
 		return employeeRepository.findById(id)
 				.map(employee -> {
 					employee.setFirstName(request.getFirstName());
 					employee.setLastName(request.getLastName());
 					employee.setTeam(team);
-					employee.setRoom(room);
+					//employee.setRoom(room);
 
 					return employeeRepository.save(employee);
 				})

@@ -1,6 +1,7 @@
 package com.sword.oams.domain;
 
 import lombok.*;
+import org.optaplanner.core.api.domain.lookup.PlanningId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "rotationGroup")
 public class RotationGroup {
+    @PlanningId
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     @Column(name = "rotationId")
@@ -24,7 +26,7 @@ public class RotationGroup {
     @NonNull
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "rotationDays",
             joinColumns = @JoinColumn(name = "rotationId"),
             inverseJoinColumns = @JoinColumn(name = "weekDayId"))

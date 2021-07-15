@@ -15,6 +15,6 @@ public class EmployeeRequest {
 	@NotBlank
 	private Long teamId;
 
-	@NotBlank
-	private Long roomId;
+	//@NotBlank
+	//private Long roomId;
 }
