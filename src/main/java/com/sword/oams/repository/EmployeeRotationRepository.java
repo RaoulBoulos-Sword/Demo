@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class EmployeeRotationRepository {
 
-    public static final Long SINGLETON_EMPLOYEE_ROTATION_ID = -1L;
+    public static final Long SINGLETON_EMPLOYEE_ROTATION_ID = 1L;
 
     @Autowired
     EmployeeRepository employeeRepository;
@@ -24,7 +24,7 @@ public class EmployeeRotationRepository {
     RoomRepository roomRepository;
 
     public EmployeeRotation findById(Long id) {
-        List<RotationGroup> rotationGroups = rotationRepository.findAll();
+        /*List<RotationGroup> rotationGroups = rotationRepository.findAll();
 
         if(SINGLETON_EMPLOYEE_ROTATION_ID.equals(id)) {
             return new EmployeeRotation(
@@ -53,7 +53,25 @@ public class EmployeeRotationRepository {
                     rotationRepository.findAll(),
                     roomRepository.findAll()
             );
+        }*/
+        if(!SINGLETON_EMPLOYEE_ROTATION_ID.equals(id)) {
+            throw new IllegalStateException("No Employee Rotation with id: "+id);
         }
+        List<Employee> employeeList = employeeRepository.findAll();
+        List<RotationGroup> rotationGroupsList = rotationRepository.findAll();
+        for(Employee employee: employeeList) {
+           List<RotationGroup> validRotations = rotationGroupsList.stream().filter(x -> x != employee.getRotationGroup()).collect(Collectors.toList());
+           Random rand = new Random();
+           int size = validRotations.size();
+           employee.setRotationGroup(validRotations.get(rand.nextInt(size)));
+        }
+
+
+        return new EmployeeRotation(
+                employeeList,
+                rotationGroupsList,
+                roomRepository.findAll()
+        );
     }
 
     public void save(EmployeeRotation employeeRotation) {

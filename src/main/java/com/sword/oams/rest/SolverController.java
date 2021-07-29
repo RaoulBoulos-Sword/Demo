@@ -94,7 +94,10 @@ public class SolverController {
                 employeeRotationRepository::findById,
                 employeeRotationRepository::save);
         SolverStatus solverStatus = getSolverStatus();
-        EmployeeRotation solution = employeeRotationRepository.findById(EmployeeRotationRepository.SINGLETON_EMPLOYEE_ROTATION_ID);
+        List<Employee> employees = employeeRepository.findAll();
+        List<RotationGroup> rotationGroups = rotationRepository.findAll();
+        List<Room> rooms = roomRepository.findAll();
+        EmployeeRotation solution = new EmployeeRotation(employees,rotationGroups,rooms);
         scoreManager.updateScore(solution);
         solution.setSolverStatus(solverStatus);
 

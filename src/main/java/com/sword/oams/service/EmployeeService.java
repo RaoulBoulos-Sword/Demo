@@ -2,10 +2,12 @@ package com.sword.oams.service;
 
 import com.sword.oams.domain.Employee;
 import com.sword.oams.domain.Room;
+import com.sword.oams.domain.RotationGroup;
 import com.sword.oams.domain.Team;
 import com.sword.oams.payload.request.EmployeeRequest;
 import com.sword.oams.repository.EmployeeRepository;
 import com.sword.oams.repository.RoomRepository;
+import com.sword.oams.repository.RotationRepository;
 import com.sword.oams.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +25,15 @@ public class EmployeeService {
 	EmployeeRepository employeeRepository;
 
 	@Autowired
+	RotationRepository rotationRepository;
+
+	@Autowired
 	RoomRepository roomRepository;
 
 	@Autowired
 	TeamRepository teamRepository;
 
 	public Employee addEmployee(EmployeeRequest request) {
-		//Room room = this.roomRepository.findById(request.getRoomId()).orElse(null);
 		Team team = this.teamRepository.findById(request.getTeamId()).orElse(null);
 
 		Employee employee = Employee.builder()
@@ -53,14 +57,16 @@ public class EmployeeService {
 
 	public Employee updateEmployeeById(Long id, EmployeeRequest request) {
 		Team team = teamRepository.findById(request.getTeamId()).orElse(null);
-		//Room room = this.roomRepository.findById(request.getRoomId()).orElse(null);
+		Room room = this.roomRepository.findById(request.getRoomId()).orElse(null);
+		RotationGroup rotationGroup = this.rotationRepository.findById(request.getRotationId()).orElse(null);
 
 		return employeeRepository.findById(id)
 				.map(employee -> {
 					employee.setFirstName(request.getFirstName());
 					employee.setLastName(request.getLastName());
 					employee.setTeam(team);
-					//employee.setRoom(room);
+					employee.setRoom(room);
+					employee.setRotationGroup(rotationGroup);
 
 					return employeeRepository.save(employee);
 				})
