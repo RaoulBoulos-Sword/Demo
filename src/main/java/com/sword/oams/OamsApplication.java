@@ -10,4 +10,5 @@ public class OamsApplication {
         SpringApplication.run(OamsApplication.class, args);
     }
 
+
 }

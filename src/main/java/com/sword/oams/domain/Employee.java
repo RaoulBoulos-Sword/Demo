@@ -7,6 +7,7 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Hashtable;
 
 @Data
 @Builder
