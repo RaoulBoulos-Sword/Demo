@@ -39,7 +39,6 @@ public class EmployeeService {
 		Employee employee = Employee.builder()
 				.firstName(request.getFirstName())
 				.lastName(request.getLastName())
-				//.room(room)
 				.team(team).build();
 
 		return employeeRepository.save(employee);
@@ -59,17 +58,28 @@ public class EmployeeService {
 		Team team = teamRepository.findById(request.getTeamId()).orElse(null);
 		Room room = this.roomRepository.findById(request.getRoomId()).orElse(null);
 		RotationGroup rotationGroup = this.rotationRepository.findById(request.getRotationId()).orElse(null);
+		if(rotationGroup == null && room == null) {
+			return employeeRepository.findById(id)
+					.map(employee -> {
+						employee.setFirstName(request.getFirstName());
+						employee.setLastName(request.getLastName());
+						employee.setTeam(team);
 
-		return employeeRepository.findById(id)
-				.map(employee -> {
-					employee.setFirstName(request.getFirstName());
-					employee.setLastName(request.getLastName());
-					employee.setTeam(team);
-					employee.setRoom(room);
-					employee.setRotationGroup(rotationGroup);
+						return employeeRepository.save(employee);
+					}).orElse(null);
+		}
+		else {
+			return employeeRepository.findById(id)
+					.map(employee -> {
+						employee.setFirstName(request.getFirstName());
+						employee.setLastName(request.getLastName());
+						employee.setTeam(team);
+						employee.setRoom(room);
+						employee.setRotationGroup(rotationGroup);
 
-					return employeeRepository.save(employee);
-				})
-				.orElse(null);
+						return employeeRepository.save(employee);
+					})
+					.orElse(null);
+		}
 	}
 }

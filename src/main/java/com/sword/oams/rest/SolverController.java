@@ -5,8 +5,6 @@ import com.sword.oams.repository.EmployeeRepository;
 import com.sword.oams.repository.EmployeeRotationRepository;
 import com.sword.oams.repository.RoomRepository;
 import com.sword.oams.repository.RotationRepository;
-import com.sword.oams.service.EmployeeService;
-import com.sword.oams.service.RoomService;
 import io.swagger.annotations.Api;
 import org.optaplanner.core.api.score.ScoreManager;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
@@ -21,8 +19,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/oams/solve")
@@ -48,10 +44,10 @@ public class SolverController {
     @Autowired
     private ScoreManager<EmployeeRotation, HardSoftScore> scoreManager;
 
-    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+    /*public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
-    }
+    }*/
 
 
     public SolverStatus getSolverStatus() {
