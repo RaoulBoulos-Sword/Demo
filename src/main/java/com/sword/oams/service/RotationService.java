@@ -18,14 +18,20 @@ public class RotationService {
 
     public List<RotationGroup> getAllRotations() { return rotationRepository.findAll(); }
 
+    public List<RotationGroup> getAllRotationsByAvailableStatus() { return rotationRepository.findByStatus(true); }
+
+    public List<RotationGroup> getAllRotationsByUnavailableStatus() { return rotationRepository.findByStatus(false); }
+
     public RotationGroup getRotationById(Long id) { return rotationRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: Rotation Not Found"));}
 
     public void deleteRotationById(Long id) { rotationRepository.deleteById(id); }
 
     public RotationGroup addRotation(RotationRequest request) {
+        boolean availability = request.getWeekDay().size()>1?true:false;
         RotationGroup newRotation = RotationGroup.builder()
                 .name(request.getName())
                 .weekdays(request.getWeekDay())
+                .status(availability)
                 .build();
         return rotationRepository.save(newRotation);
     }
@@ -35,6 +41,7 @@ public class RotationService {
                 .map(rotationGroup -> {
                     rotationGroup.setName(request.getName());
                     rotationGroup.setWeekdays(request.getWeekDay());
+                    rotationGroup.setStatus(request.isStatus());
                     return rotationRepository.save(rotationGroup);
                 })
                 .orElse(null);

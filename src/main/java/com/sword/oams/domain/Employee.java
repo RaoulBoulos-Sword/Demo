@@ -21,7 +21,7 @@ public class Employee {
     @PlanningId
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "employeeId", nullable = false)
+    @Column(name = "employee_Id", nullable = false)
     private Long employeeId;
 
     @NotNull
@@ -34,8 +34,8 @@ public class Employee {
 
     @NotNull
     @NonNull
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "teamId")
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name = "team_Id")
     private Team team;
 
     @PlanningVariable(valueRangeProviderRefs = {"roomRange"})
@@ -48,4 +48,7 @@ public class Employee {
     @PlanningVariable(valueRangeProviderRefs = {"rotationRange"})
     @ManyToOne
     private RotationGroup rotationGroup;
+
+    @Column(name = "Availability")
+    private boolean status = true;
 }

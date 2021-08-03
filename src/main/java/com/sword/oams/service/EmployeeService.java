@@ -39,7 +39,9 @@ public class EmployeeService {
 		Employee employee = Employee.builder()
 				.firstName(request.getFirstName())
 				.lastName(request.getLastName())
-				.team(team).build();
+				.team(team)
+				.status(true)
+				.build();
 
 		return employeeRepository.save(employee);
 	}
@@ -52,34 +54,28 @@ public class EmployeeService {
 		return employeeRepository.findAll();
 	}
 
+	public List<Employee> getAllEmployeesByAvailableStatus() { return employeeRepository.findByStatus(true); }
+
+	public List<Employee> getAllEmployeesByUnavailableStatus() { return employeeRepository.findByStatus(false); }
+
+
 	public void deleteEmployeeById(Long id) { employeeRepository.deleteById(id); }
 
 	public Employee updateEmployeeById(Long id, EmployeeRequest request) {
 		Team team = teamRepository.findById(request.getTeamId()).orElse(null);
 		Room room = this.roomRepository.findById(request.getRoomId()).orElse(null);
 		RotationGroup rotationGroup = this.rotationRepository.findById(request.getRotationId()).orElse(null);
-		if(rotationGroup == null && room == null) {
-			return employeeRepository.findById(id)
+		return employeeRepository.findById(id)
 					.map(employee -> {
 						employee.setFirstName(request.getFirstName());
 						employee.setLastName(request.getLastName());
 						employee.setTeam(team);
-
-						return employeeRepository.save(employee);
-					}).orElse(null);
-		}
-		else {
-			return employeeRepository.findById(id)
-					.map(employee -> {
-						employee.setFirstName(request.getFirstName());
-						employee.setLastName(request.getLastName());
-						employee.setTeam(team);
+						employee.setStatus(request.isStatus());
 						employee.setRoom(room);
 						employee.setRotationGroup(rotationGroup);
 
 						return employeeRepository.save(employee);
 					})
 					.orElse(null);
-		}
 	}
 }

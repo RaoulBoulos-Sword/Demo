@@ -17,7 +17,7 @@ import java.util.Set;
 public class Team {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "teamId")
+    @Column(name = "team_Id")
     private Long teamId;
 
     @NotNull

@@ -23,6 +23,14 @@ public class EmployeeController {
     @ApiOperation(value = "This method is used to get the employees.")
     public List<Employee> getEmployees() { return employeeService.getAllEmployees(); }
 
+    @GetMapping("/available")
+    @ApiOperation(value = "This method is used to get all available employees.")
+    public List<Employee> availableEmployees() { return employeeService.getAllEmployeesByAvailableStatus(); }
+
+    @GetMapping("/unavailable")
+    @ApiOperation(value = "This method is used to get all unavailable employees.")
+    public List<Employee> unavailableEmployees() { return employeeService.getAllEmployeesByUnavailableStatus(); }
+
     @PostMapping("")
     @ApiOperation(value = "This method is used to add an employee.")
     Employee addEmployee(@RequestBody EmployeeRequest employee) {

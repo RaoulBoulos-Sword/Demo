@@ -19,7 +19,7 @@ import java.util.Set;
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "userId")
+    @Column(name = "user_Id")
     private Long userId;
 
     @NotNull
@@ -40,8 +40,8 @@ public class User {
     private String address;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "userAuthRoles",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "authRoleId"))
+    @JoinTable(name = "user_Auth_Roles",
+            joinColumns = @JoinColumn(name = "user_Id"),
+            inverseJoinColumns = @JoinColumn(name = "auth_Role_Id"))
     private Set<AuthenticationRole> roles = new HashSet<>();
 }

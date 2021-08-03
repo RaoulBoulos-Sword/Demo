@@ -14,4 +14,7 @@ public class RotationRequest {
 
     @NotBlank
     private Set<Weekdays> weekDay;
+
+    @NotBlank
+    private boolean status;
 }

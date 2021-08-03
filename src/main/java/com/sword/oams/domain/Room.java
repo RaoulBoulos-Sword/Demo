@@ -18,7 +18,7 @@ public class Room {
     @PlanningId
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "roomId")
+    @Column(name = "room_Id")
     private Long roomId;
 
     @NotNull

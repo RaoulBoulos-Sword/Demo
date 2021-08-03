@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Role {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "roleId")
+    @Column(name = "role_Id")
     private Long roleId;
 
     @NotNull

@@ -14,12 +14,12 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "rotationGroup")
+@Table(name = "rotation_Group")
 public class RotationGroup {
     @PlanningId
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "rotationId")
+    @Column(name = "rotation_Id")
     private Long rotationId;
 
     @NotNull
@@ -27,9 +27,13 @@ public class RotationGroup {
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "rotationDays",
-            joinColumns = @JoinColumn(name = "rotationId"),
-            inverseJoinColumns = @JoinColumn(name = "weekDayId"))
+    @JoinTable(name = "rotation_Days",
+            joinColumns = @JoinColumn(name = "rotation_Id"),
+            inverseJoinColumns = @JoinColumn(name = "week_Day_Id"))
     private Set<Weekdays> weekdays = new HashSet<>();
+
+    //Rotations to be ignored from employees solving
+    @Column(name = "Availability")
+    private boolean status = false;
 }
 

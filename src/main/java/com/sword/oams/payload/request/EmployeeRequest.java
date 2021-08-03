@@ -13,11 +13,12 @@ public class EmployeeRequest {
 	private String lastName;
 
 	@NotBlank
+	private boolean status;
+
+	@NotBlank
 	private Long teamId;
 
-
 	private Long roomId;
-
 
 	private Long rotationId;
 }

@@ -10,10 +10,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "weekDays")
+@Table(name = "week_Days")
 public class Weekdays {
     @Id
-    @Column(name = "weekDayId")
+    @Column(name = "week_Day_Id")
     private Long weekDayId;
 
     @Enumerated(EnumType.STRING)
