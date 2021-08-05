@@ -44,4 +44,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_Id"),
             inverseJoinColumns = @JoinColumn(name = "auth_Role_Id"))
     private Set<AuthenticationRole> roles = new HashSet<>();
+
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
 }
