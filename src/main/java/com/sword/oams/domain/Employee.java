@@ -32,7 +32,7 @@ public class Employee {
     @NonNull
     private String lastName;
 
-    @OneToOne(optional=false)
+    @OneToOne(optional=false, cascade = CascadeType.ALL)
     @JoinColumn(name="user_Id", unique=true, nullable=false, updatable=false)
     private User user;
 

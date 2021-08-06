@@ -69,16 +69,43 @@ public class EmployeeService {
 	}
 
 	public Employee getEmployeeById(Long id) {
-		return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: Employee Id Not Found"));
+		Employee emp = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: Employee Id Not Found"));
+		User user = emp.getUser();
+		user.setPassword("Not Available");
+		emp.setUser(user);
+
+		return emp;
 	}
 
 	public List<Employee> getAllEmployees() {
-		return employeeRepository.findAll();
+		List<Employee> emps = employeeRepository.findAll();
+		for(Employee emp: emps) {
+			User user = emp.getUser();
+			user.setPassword("Not Available");
+			emp.setUser(user);
+		}
+		return emps;
 	}
 
-	public List<Employee> getAllEmployeesByAvailableStatus() { return employeeRepository.findByStatus(true); }
+	public List<Employee> getAllEmployeesByAvailableStatus() {
+		List<Employee> emps = employeeRepository.findByStatus(true);
+		for(Employee emp: emps) {
+			User user = emp.getUser();
+			user.setPassword("Not Available");
+			emp.setUser(user);
+		}
+		return emps;
+	}
 
-	public List<Employee> getAllEmployeesByUnavailableStatus() { return employeeRepository.findByStatus(false); }
+	public List<Employee> getAllEmployeesByUnavailableStatus() {
+		List<Employee> emps = employeeRepository.findByStatus(false);
+		for(Employee emp: emps) {
+			User user = emp.getUser();
+			user.setPassword("Not Available");
+			emp.setUser(user);
+		}
+		return emps;
+	}
 
 
 	public void deleteEmployeeById(Long id) { employeeRepository.deleteById(id); }
