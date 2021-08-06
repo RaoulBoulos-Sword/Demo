@@ -33,6 +33,11 @@ public class EmployeeRotationRepository {
         if(!SINGLETON_EMPLOYEE_ROTATION_ID.equals(id)) {
             throw new IllegalStateException("No Employee Rotation with id: "+id);
         }
+        for(Employee emp: employeeService.getAllEmployeesByUnavailableStatus()) {
+            emp.setRotationGroup(null);
+            emp.setRoom(null);
+            employeeRepository.save(emp);
+        }
         return new EmployeeRotation(
                 employeeService.getAllEmployeesByAvailableStatus(),
                 rotationService.getAllRotationsByAvailableStatus(),

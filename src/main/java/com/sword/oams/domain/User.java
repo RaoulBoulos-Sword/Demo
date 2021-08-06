@@ -1,9 +1,6 @@
 package com.sword.oams.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,8 +9,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "user") //uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
@@ -21,6 +20,9 @@ public class User {
     @NotNull
     @Column(name = "user_Id")
     private Long userId;
+
+    //@OneToOne(mappedBy = "user", optional = false)
+    //private Employee employee;
 
     @NotNull
     @NonNull

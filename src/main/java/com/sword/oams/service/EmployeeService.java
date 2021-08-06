@@ -1,21 +1,16 @@
 package com.sword.oams.service;
 
-import com.sword.oams.domain.Employee;
-import com.sword.oams.domain.Room;
-import com.sword.oams.domain.RotationGroup;
-import com.sword.oams.domain.Team;
+import com.sword.oams.domain.*;
 import com.sword.oams.payload.request.EmployeeRequest;
-import com.sword.oams.repository.EmployeeRepository;
-import com.sword.oams.repository.RoomRepository;
-import com.sword.oams.repository.RotationRepository;
-import com.sword.oams.repository.TeamRepository;
+import com.sword.oams.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -33,15 +28,42 @@ public class EmployeeService {
 	@Autowired
 	TeamRepository teamRepository;
 
+	@Autowired
+	AuthRolesRepository authRolesRepository;
+
+	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
 	public Employee addEmployee(EmployeeRequest request) {
 		Team team = this.teamRepository.findById(request.getTeamId()).orElse(null);
+		Set<AuthenticationRole> roles = new HashSet<>();
+		AuthenticationRole userRole = authRolesRepository.findByName(ERole.ROLE_USER).orElse(null);
+		roles.add(userRole);
 
 		Employee employee = Employee.builder()
 				.firstName(request.getFirstName())
 				.lastName(request.getLastName())
 				.team(team)
-				.status(true)
+				.status(request.isStatus())
 				.build();
+
+		User user = User.builder()
+					.resetPasswordToken(null)
+					.address("Lebanon")
+					.username(request.getFirstName()+request.getLastName())
+					.email(request.getFirstName()+"."+request.getLastName()+"@sword-group.com")
+					.password(passwordEncoder.encode("Changeme"))
+					.roles(roles)
+					//.employee(employee)
+					.build();
+
+
+
+		employee.setUser(user);
+		userRepository.save(user);
 
 		return employeeRepository.save(employee);
 	}

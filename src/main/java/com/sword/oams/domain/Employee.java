@@ -32,6 +32,10 @@ public class Employee {
     @NonNull
     private String lastName;
 
+    @OneToOne(optional=false)
+    @JoinColumn(name="user_Id", unique=true, nullable=false, updatable=false)
+    private User user;
+
     @NotNull
     @NonNull
     @ManyToOne(cascade=CascadeType.PERSIST)
@@ -39,10 +43,7 @@ public class Employee {
     private Team team;
 
     @PlanningVariable(valueRangeProviderRefs = {"roomRange"})
-    //@NotNull
-    //@NonNull
-    @ManyToOne//(cascade=CascadeType.ALL)
-    //@JoinColumn(name = "roomId")
+    @ManyToOne
     private Room room;
 
     @PlanningVariable(valueRangeProviderRefs = {"rotationRange"})
@@ -50,5 +51,5 @@ public class Employee {
     private RotationGroup rotationGroup;
 
     @Column(name = "Availability")
-    private boolean status = true;
+    private boolean status;
 }

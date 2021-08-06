@@ -11,8 +11,8 @@
     <groupId>com.sword</groupId>
     <artifactId>oams</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>oams</name>
-    <description>Demo project for Sword-Group</description>
+    <name>O.A.M.S.</name>
+    <description>Internship project for Sword-Group</description>
     <properties>
         <java.version>16</java.version>
     </properties>
@@ -54,10 +54,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

@@ -39,6 +39,7 @@ public class ForgotPasswordController {
     public void sendEmail(String recipientEmail, String link) {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+
         mailSender.setHost(this.emailConfig.getHost());
         mailSender.setPort(this.emailConfig.getPort());
         mailSender.setUsername(this.emailConfig.getUsername());
@@ -60,7 +61,7 @@ public class ForgotPasswordController {
         String token = RandomString.make(30);
 
         userService.updateResetPasswordToken(token, email);
-        String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
+        String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password/" + token;
         sendEmail(email, resetPasswordLink);
     }
 

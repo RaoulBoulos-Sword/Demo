@@ -5,6 +5,7 @@ import com.sword.oams.repository.EmployeeRepository;
 import com.sword.oams.repository.EmployeeRotationRepository;
 import com.sword.oams.repository.RoomRepository;
 import com.sword.oams.repository.RotationRepository;
+import com.sword.oams.service.EmployeeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.optaplanner.core.api.score.ScoreManager;
@@ -20,16 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/oams/solve")
 @Api(tags = "OptaPlanner Solver")
 public class SolverController {
-
-    @Autowired
-    EmployeeRepository employeeRepository;
-
-    @Autowired
-    RotationRepository rotationRepository;
-
-    @Autowired
-    RoomRepository roomRepository;
-
     //Throwing Exception
     @Autowired
     private EmployeeRotationRepository employeeRotationRepository;
