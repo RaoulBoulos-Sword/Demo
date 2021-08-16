@@ -54,7 +54,7 @@ public class EmployeeService {
 		User user = User.builder()
 					.resetPasswordToken(null)
 					.address("Lebanon")
-					.username(request.getFirstName()+request.getLastName().toUpperCase(Locale.ROOT).replaceAll("\s",""))
+					.username(request.getFirstName().replaceAll("\s","-")+"."+request.getLastName().replaceAll("\s","-")+"@sword-group.com")
 					.email(request.getFirstName().replaceAll("\s","-")+"."+request.getLastName().replaceAll("\s","-")+"@sword-group.com")
 					.password(passwordEncoder.encode("Changeme"))
 					.roles(roles)
