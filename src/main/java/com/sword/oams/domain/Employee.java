@@ -52,12 +52,4 @@ public class Employee {
 
     @Column(name = "Availability")
     private boolean status;
-
-    /*public void setFirstName(String firstName) {
-        this.firstName = firstName.trim();
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName.trim();
-    }*/
 }
