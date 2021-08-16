@@ -46,10 +46,10 @@ public class ForgotPasswordController {
         mailSender.setPassword(this.emailConfig.getPassword());
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom("raoul.v.boulos@gmail.com");
+        mailMessage.setFrom("raoul.boulos@sword-group.com");
         mailMessage.setTo(recipientEmail);
         mailMessage.setSubject("Password Change");
-        mailMessage.setText("Send a post request to this link to change your password:\n"+link);
+        mailMessage.setText("Click on this link to change your password: "+link);
 
         mailSender.send(mailMessage);
     }

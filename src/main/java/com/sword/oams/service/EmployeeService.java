@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 @Service
@@ -53,14 +54,11 @@ public class EmployeeService {
 		User user = User.builder()
 					.resetPasswordToken(null)
 					.address("Lebanon")
-					.username(request.getFirstName()+request.getLastName())
-					.email(request.getFirstName()+"."+request.getLastName()+"@sword-group.com")
+					.username(request.getFirstName()+request.getLastName().toUpperCase(Locale.ROOT).replaceAll("\s",""))
+					.email(request.getFirstName().replaceAll("\s","-")+"."+request.getLastName().replaceAll("\s","-")+"@sword-group.com")
 					.password(passwordEncoder.encode("Changeme"))
 					.roles(roles)
-					//.employee(employee)
 					.build();
-
-
 
 		employee.setUser(user);
 		userRepository.save(user);
@@ -70,41 +68,19 @@ public class EmployeeService {
 
 	public Employee getEmployeeById(Long id) {
 		Employee emp = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: Employee Id Not Found"));
-		User user = emp.getUser();
-		user.setPassword("Not Available");
-		emp.setUser(user);
-
 		return emp;
 	}
 
 	public List<Employee> getAllEmployees() {
-		List<Employee> emps = employeeRepository.findAll();
-		for(Employee emp: emps) {
-			User user = emp.getUser();
-			user.setPassword("Not Available");
-			emp.setUser(user);
-		}
-		return emps;
+		return employeeRepository.findAll();
 	}
 
 	public List<Employee> getAllEmployeesByAvailableStatus() {
-		List<Employee> emps = employeeRepository.findByStatus(true);
-		for(Employee emp: emps) {
-			User user = emp.getUser();
-			user.setPassword("Not Available");
-			emp.setUser(user);
-		}
-		return emps;
+		return employeeRepository.findByStatus(true);
 	}
 
 	public List<Employee> getAllEmployeesByUnavailableStatus() {
-		List<Employee> emps = employeeRepository.findByStatus(false);
-		for(Employee emp: emps) {
-			User user = emp.getUser();
-			user.setPassword("Not Available");
-			emp.setUser(user);
-		}
-		return emps;
+		return employeeRepository.findByStatus(false);
 	}
 
 

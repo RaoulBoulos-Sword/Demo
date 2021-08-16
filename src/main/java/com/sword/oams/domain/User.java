@@ -21,9 +21,6 @@ public class User {
     @Column(name = "user_Id")
     private Long userId;
 
-    //@OneToOne(mappedBy = "user", optional = false)
-    //private Employee employee;
-
     @NotNull
     @NonNull
     private String username;
