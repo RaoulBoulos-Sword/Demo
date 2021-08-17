@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,8 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user") //uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
+@Table(name = "user")
+//uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull

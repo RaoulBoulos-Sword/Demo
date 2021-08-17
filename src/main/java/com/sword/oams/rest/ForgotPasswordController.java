@@ -48,6 +48,12 @@ public class ForgotPasswordController {
         }
     }
 
+    @GetMapping("/reset_password/{token}")
+    public String clickedLink(@PathVariable String token) {
+        User user = userService.getResetPasswordToken(token);
+        return "Changing password for user: "+user.getUsername();
+    }
+
     @PostMapping("/reset_password/{token}")
     public String processResetPassword(@PathVariable String token, @RequestBody String password) {
         User user = userService.getResetPasswordToken(token);

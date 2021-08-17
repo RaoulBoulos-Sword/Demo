@@ -30,7 +30,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public void updateResetPasswordToken(String token, String email)  throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
-                //.orElseThrow(() -> new UsernameNotFoundException("No user was found with this email: "+email));
         if(user != null) {
             user.setResetPasswordToken(token);
             userRepository.save(user);
@@ -39,7 +38,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public User getResetPasswordToken(String token) {
         return userRepository.findByResetPasswordToken(token);
-                //.orElseThrow(() -> new UsernameNotFoundException("No user was found with this reset password token: "+token));
     }
 
     public void updatePassword(User user, String password) {
