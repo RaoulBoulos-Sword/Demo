@@ -2,6 +2,7 @@ package com.sword.oams.rest;
 
 import com.sword.oams.domain.User;
 import com.sword.oams.payload.request.ForgotPasswordRequest;
+import com.sword.oams.payload.response.MessageResponse;
 import com.sword.oams.service.NotificationService;
 import com.sword.oams.service.UserDetailsServiceImpl;
 import com.sword.oams.utils.Utility;
@@ -11,6 +12,7 @@ import net.bytebuddy.utility.RandomString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -55,12 +57,12 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/reset_password/{token}")
-    public String processResetPassword(@PathVariable String token, @RequestBody String password) {
+    public ResponseEntity<?> processResetPassword(@PathVariable String token, @RequestBody String password) {
         User user = userService.getResetPasswordToken(token);
         if(user==null) {
-            return "User with reset token: "+token+" was not found";
+            return ResponseEntity.badRequest().body(new MessageResponse("User with reset token: "+token+" was not found"));
         }
         userService.updatePassword(user,password);
-        return "Password Changed Successfully";
+        return ResponseEntity.ok(new MessageResponse("Password Changed Successfully"));
     }
 }
