@@ -7,6 +7,7 @@ import com.sword.oams.repository.WeekDayRepository;
 import com.sword.oams.service.WeekDayService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class WeekdayController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     Weekdays addWeekday(@RequestBody WeekdayRequest request) {
         return weekDayService.addWeekDay(request);
     }
@@ -34,6 +36,7 @@ public class WeekdayController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     void deleteWeekday(@PathVariable Long id) {
         weekDayService.deleteWeekDayById(id);
     }

@@ -13,6 +13,7 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.solver.SolverManager;
 import org.optaplanner.core.api.solver.SolverStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/oams/solve")
 @Api(tags = "OptaPlanner Solver")
 public class SolverController {
-    //Throwing Exception
     @Autowired
     private EmployeeRotationRepository employeeRotationRepository;
 
@@ -35,8 +35,9 @@ public class SolverController {
         return solverManager.getSolverStatus(EmployeeRotationRepository.SINGLETON_EMPLOYEE_ROTATION_ID);
     }
 
-    @ApiOperation(value = "This method is used to assign to each employee an available rotation group & room.")
     @PostMapping("/start")
+    @PreAuthorize("hasRole('ADMIN')")
+    @ApiOperation(value = "This method is used to assign to each employee an available rotation group & room.")
     public EmployeeRotation solve() throws RuntimeException {
         solverManager.solveAndListen(EmployeeRotationRepository.SINGLETON_EMPLOYEE_ROTATION_ID,
                 employeeRotationRepository::findById,
@@ -49,8 +50,9 @@ public class SolverController {
         return solution;
     }
 
-    @ApiOperation(value = "Method to stop solving.")
     @PostMapping("/stop")
+    @PreAuthorize("hasRole('ADMIN')")
+    @ApiOperation(value = "Method to stop solving.")
     public void stopSolving() {
         solverManager.terminateEarly(EmployeeRotationRepository.SINGLETON_EMPLOYEE_ROTATION_ID);
     }

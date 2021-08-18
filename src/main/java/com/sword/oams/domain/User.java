@@ -1,6 +1,7 @@
 package com.sword.oams.domain;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,7 +17,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
-//uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull

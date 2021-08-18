@@ -2,8 +2,10 @@ package com.sword.oams.service;
 
 import com.sword.oams.domain.*;
 import com.sword.oams.payload.request.EmployeeRequest;
+import com.sword.oams.payload.response.MessageResponse;
 import com.sword.oams.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,11 +40,17 @@ public class EmployeeService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
-	public Employee addEmployee(EmployeeRequest request) {
+	public ResponseEntity<?> addEmployee(EmployeeRequest request) {
 		Team team = this.teamRepository.findById(request.getTeamId()).orElse(null);
 		Set<AuthenticationRole> roles = new HashSet<>();
 		AuthenticationRole userRole = authRolesRepository.findByName(ERole.ROLE_USER).orElse(null);
 		roles.add(userRole);
+
+		String username = (request.getFirstName()+"."+request.getLastName()+"@sword-group.com").replaceAll("\s","-");
+
+		if(userRepository.existsByUsername(username)) {
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username already exists !"));
+		}
 
 		Employee employee = Employee.builder()
 				.firstName(request.getFirstName())
@@ -54,16 +62,17 @@ public class EmployeeService {
 		User user = User.builder()
 					.resetPasswordToken(null)
 					.address("Lebanon")
-					.username(request.getFirstName().replaceAll("\s","-")+"."+request.getLastName().replaceAll("\s","-")+"@sword-group.com")
-					.email(request.getFirstName().replaceAll("\s","-")+"."+request.getLastName().replaceAll("\s","-")+"@sword-group.com")
+					.username(username)
+					.email(username)
 					.password(passwordEncoder.encode("Changeme"))
 					.roles(roles)
 					.build();
 
 		employee.setUser(user);
 		userRepository.save(user);
+		employeeRepository.save(employee);
 
-		return employeeRepository.save(employee);
+		return ResponseEntity.ok(new MessageResponse("Employee & User added successfully !"));
 	}
 
 	public Employee getEmployeeById(Long id) {

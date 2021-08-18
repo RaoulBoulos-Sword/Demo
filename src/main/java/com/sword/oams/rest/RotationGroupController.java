@@ -6,6 +6,7 @@ import com.sword.oams.service.RotationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class RotationGroupController {
     List<RotationGroup> unavailableRotationGroups() { return rotationService.getAllRotationsByUnavailableStatus(); }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @ApiOperation(value = "This method is used to add a rotation group.")
     RotationGroup addRotationGroup(@RequestBody RotationRequest request) {
         return rotationService.addRotation(request);
@@ -43,12 +45,14 @@ public class RotationGroupController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @ApiOperation(value = "This method is used to update a rotation group by its ID.")
     RotationGroup updateRotationGroup(@RequestBody RotationRequest request, @PathVariable Long id) {
         return rotationService.updateRotationById(id,request);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @ApiOperation(value = "This method is used to delete a rotation group by its ID.")
     void deleteRotationGroup(@PathVariable Long id) {
         rotationService.deleteRotationById(id);

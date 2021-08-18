@@ -6,6 +6,7 @@ import com.sword.oams.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class RoleController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @ApiOperation(value = "This method is used to add a role.")
     Role addRole(@RequestBody RoleRequest newRole) {
         return roleService.addRole(newRole);
@@ -34,10 +36,12 @@ public class RoleController {
     Role getRole(@PathVariable Long id) { return roleService.getRoleById(id); }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @ApiOperation(value = "This method is used to delete a role by its id.")
     void deleteRole(@PathVariable Long id) { roleService.deleteRoleById(id); }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @ApiOperation(value = "This method is used to update a role by its id.")
     Role updateRole(@PathVariable Long id, @RequestBody RoleRequest request) {
         return roleService.updateRoleById(id, request);
