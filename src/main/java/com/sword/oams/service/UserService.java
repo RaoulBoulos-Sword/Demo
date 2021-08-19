@@ -27,7 +27,7 @@ public class UserService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException());
+                .orElseThrow(() -> new RuntimeException("No user with valid id"));
     }
 
     public void deleteUserById(Long id) {
@@ -42,7 +42,7 @@ public class UserService {
                 .map(user -> {
                     user.setUsername(request.getUsername());
                     user.setAddress(request.getAddress());
-                    user.setEmail(request.getEmail());
+                    //user.setEmail(request.getEmail());
 
                     if(requestRoles== null) {
                         AuthenticationRole userRole = authRolesRepository.findByName(ERole.ROLE_USER)

@@ -63,7 +63,7 @@ public class EmployeeService {
 					.resetPasswordToken(null)
 					.address("Lebanon")
 					.username(username)
-					.email(username)
+					//.email(username)
 					.password(passwordEncoder.encode("Changeme"))
 					.roles(roles)
 					.build();

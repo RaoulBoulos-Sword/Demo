@@ -11,11 +11,12 @@ public class UserRequest {
     private String address;
 
     @NotBlank
+    @Email
     private String username;
 
-    @NotBlank
-    @Email
-    private String email;
+    //@NotBlank
+    //@Email
+    //private String email;
 
     private Set<String> roles;
 }

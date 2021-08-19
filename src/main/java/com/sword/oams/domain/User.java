@@ -25,12 +25,13 @@ public class User {
 
     @NotNull
     @NonNull
+    @Email
     private String username;
 
-    @NotNull
-    @NonNull
-    @Email
-    private String email;
+    //@NotNull
+    //@NonNull
+    //@Email
+    //private String email;
 
     @NotNull
     @NonNull
