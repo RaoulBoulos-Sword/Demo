@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/oams/rooms")
+@CrossOrigin(origins = "*",maxAge = 3600)
 @Api(tags = "Rooms")
 public class RoomController {
     @Autowired

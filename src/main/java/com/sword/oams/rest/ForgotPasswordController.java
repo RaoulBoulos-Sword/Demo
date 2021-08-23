@@ -25,6 +25,7 @@ import java.io.UnsupportedEncodingException;
 
 @Slf4j
 @Api(tags = "Forgot Password")
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RestController
 public class ForgotPasswordController {
 
@@ -42,7 +43,7 @@ public class ForgotPasswordController {
         String token = RandomString.make(30);
 
         userService.updateResetPasswordToken(token, email);
-        String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password/" + token;
+        String resetPasswordLink = "http://localhost:4200" + "/reset_password/" + token;
         try {
             notificationService.sendNotification(email,resetPasswordLink);
         } catch (MailException e) {

@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/oams/teams")
+@CrossOrigin(origins = "*",maxAge = 3600)
 @Api(tags = "Teams")
 public class TeamController {
     @Autowired

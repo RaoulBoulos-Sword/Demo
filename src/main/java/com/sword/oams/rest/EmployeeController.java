@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/oams/employees")
+@CrossOrigin(origins = "*",maxAge = 3600)
 @Api( tags = "Employees")
 public class EmployeeController {
 

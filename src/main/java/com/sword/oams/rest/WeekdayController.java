@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/oams/days")
+@CrossOrigin(origins = "*",maxAge = 3600)
 @Api(tags = "Weekday")
 public class WeekdayController {
     @Autowired

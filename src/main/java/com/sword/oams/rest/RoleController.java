@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/oams/roles")
+@CrossOrigin(origins = "*",maxAge = 3600)
 @Api(tags = "Roles")
 public class RoleController {
     @Autowired

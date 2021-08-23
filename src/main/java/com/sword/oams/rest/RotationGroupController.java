@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("oams/rotationGroups")
+@CrossOrigin(origins = "*",maxAge = 3600)
 @Api(tags = "Rotation Groups")
 public class RotationGroupController {
     @Autowired
