@@ -23,7 +23,7 @@ public class Room {
 
     @NotNull
     @NonNull
-    private String block;
+    private char block;
 
     @NotNull
     @NonNull

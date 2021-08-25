@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RoomService {
@@ -36,6 +38,17 @@ public class RoomService {
     public List<Room> getAllRooms() { return roomRepository.findAll(); }
 
     public void deleteRoomById(Long id) { roomRepository.deleteById(id); }
+
+    public Map<Character,Integer> getRoomsCapacity() {
+        Map<Character, Integer> roomsCapacity = new HashMap<>();
+        int size;char block;
+        for(int ascii = 65;ascii<71;ascii++) {
+            block = (char) ascii;
+            size = roomRepository.findByBlock(block).size();
+            roomsCapacity.put(block, size);
+        }
+        return roomsCapacity;
+    }
 
     public Room updateRoomById(Long id, RoomRequest request) {
         return roomRepository.findById(id)

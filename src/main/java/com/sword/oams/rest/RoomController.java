@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/oams/rooms")
@@ -23,6 +24,13 @@ public class RoomController {
     @GetMapping("")
     @ApiOperation(value = "This method is used to get all rooms.")
     List<Room> allRooms() { return roomService.getAllRooms(); }
+
+    @GetMapping("/size")
+    @ApiOperation(value = "This method is used to return the capacity of each block.")
+    Map<Character, Integer> getCapacity() {
+        return roomService.getRoomsCapacity();
+    }
+
 
     @PostMapping("")
     @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")

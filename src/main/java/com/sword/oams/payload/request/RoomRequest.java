@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class RoomRequest {
 
     @NotBlank
-    private String block;
+    private char block;
 
     @NotBlank
     private int deskNumber;
