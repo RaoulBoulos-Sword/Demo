@@ -1,1 +1,1 @@
-# Demo
+# Run scripts on MySQL Workbench
